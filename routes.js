@@ -1,6 +1,7 @@
 const ROUTES = [
     {
         url: '/validation',
+        auth: true,
         rateLimit: {
             windowMs: 15 * 60 * 1000,
             max: 5
@@ -15,6 +16,7 @@ const ROUTES = [
     },
     {
         url: '/user/create',
+        auth: true,
         rateLimit: {
             windowMs: 15 * 60 * 1000,
             max: 5
