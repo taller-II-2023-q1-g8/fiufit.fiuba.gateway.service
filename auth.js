@@ -22,10 +22,9 @@ function checkAuth(req, res, next) {
 
 
 const setupAuth = (app, routes) => {
-
     routes.forEach(r => {
         if (r.auth) {
-            app.use(r.url, checkAuth(req, res, next), function (req, res, next) {
+            app.use(r.url, checkAuth, function (req, res, next) {
                 next();
             });
         }

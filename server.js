@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 const admin = require('firebase-admin')
+const axios = require('axios');
 
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
@@ -33,8 +34,34 @@ function checkAuth(req, res, next) {
   }
 }
 
-app.use('/', checkAuth)
-//app.use('/', createProxyMiddleware({ target: 'http://www.google.com/', changeOrigin: true }))
+
+//app.use('/', checkAuth)
+
+app.put('/user', (req, res) => {
+  const url = 'https://fiufit-usuarios.onrender.com/user/';
+  const data = req.body;
+
+
+  axios.put(url, data)
+  .then(response => {
+    //console.log(response);
+    console.log(response.status);
+    res.statusCode = response.status;
+    res.json({
+      message: response.data
+    })
+  })
+  .catch(error => {
+    //handleo
+
+    console.log(error.response.status);
+    res.statusCode = error.response.status;
+    res.json({
+      message: error.response.data
+    })
+  });
+
+})
 
 
 app.get('/', (req, res) => {
