@@ -3,6 +3,12 @@ var path = require('path');
 var logger = require('morgan');
 const admin = require('firebase-admin')
 const axios = require('axios');
+const cors = require('cors');
+
+const cors_options = {
+  origin: "*"
+}
+
 
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
@@ -17,6 +23,7 @@ var app = express();
 const port = 3000;
 
 app.use(logger('dev'));
+app.use(cors(cors_options));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
