@@ -43,11 +43,10 @@ function checkAuth(req, res, next) {
 
 
 //app.use('/', checkAuth)
-
+//For creating an user
 app.put('/user', (req, res) => {
   const url = 'https://fiufit-usuarios.onrender.com/user/';
   const data = req.body;
-
 
   axios.put(url, data)
   .then(response => {
@@ -67,8 +66,82 @@ app.put('/user', (req, res) => {
       message: error.response.data
     })
   });
-
 })
+
+
+//Get an user by ID
+app.get('/user/:id', checkAuth, (req, res) => {
+  const url = 'https://fiufit-usuarios.onrender.com/user/' + req.params.id;
+  console.log(url)
+  axios.get(url)
+      .then(response => {
+        //console.log(response);
+        console.log(response.status);
+        res.statusCode = response.status;
+        res.json({
+          message: response.data
+        })
+      })
+      .catch(error => {
+        //handleo
+
+        console.log(error.response.status);
+        res.statusCode = error.response.status;
+        res.json({
+          message: error.response.data
+        })
+      });
+})
+
+//Delete an user by ID
+app.delete('/user/:id', checkAuth, (req, res) => {
+  const url = 'https://fiufit-usuarios.onrender.com/user/' + req.params.id;
+  console.log(url)
+  axios.delete(url)
+      .then(response => {
+        //console.log(response);
+        console.log(response.status);
+        res.statusCode = response.status;
+        res.json({
+          message: response.data
+        })
+      })
+      .catch(error => {
+        //handleo
+
+        console.log(error.response.status);
+        res.statusCode = error.response.status;
+        res.json({
+          message: error.response.data
+        })
+      });
+})
+
+//Update an user
+app.post('/user', checkAuth, (req, res) => {
+  const url = 'https://fiufit-usuarios.onrender.com/user/';
+  const data = req.body;
+
+  axios.post(url, data)
+      .then(response => {
+        //console.log(response);
+        console.log(response.status);
+        res.statusCode = response.status;
+        res.json({
+          message: response.data
+        })
+      })
+      .catch(error => {
+        //handleo
+
+        console.log(error.response.status);
+        res.statusCode = error.response.status;
+        res.json({
+          message: error.response.data
+        })
+      });
+})
+
 
 
 app.get('/', (req, res) => {
@@ -76,7 +149,6 @@ app.get('/', (req, res) => {
     message: 'Hello World!'
   })
 })
-
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
