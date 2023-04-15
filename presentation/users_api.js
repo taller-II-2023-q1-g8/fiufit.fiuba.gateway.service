@@ -21,10 +21,9 @@ function checkAuth(req, res, next) {
 
 //app.use('/', checkAuth)
 //For creating an user
-router.put('/', (req, res) => {
+router.put('/', async (req, res) => {
     const data = req.body;
-    var users_response = users_business.create_user(data)
-    console.log("JAJAJAJAJAJA" + users_response)
+    var users_response = await users_business.create_user(data)
     res.statusCode = users_response.status;
     res.json({
         message: users_response.message
@@ -32,12 +31,14 @@ router.put('/', (req, res) => {
 })
 
 //Get an user by username
-router.get('/:username', checkAuth, (req, res) => {
-    var users_response = users_business.find_by_username(req.params.username)
-
+router.get('/:username', checkAuth, async (req, res) => {
+    var users_response = await users_business.find_by_username(req.params.username)
     res.statusCode = users_response.status;
-    res.message = users_response.message
+    res.json({
+        message: users_response.message
+    })
 })
+
 /*
 //Delete an user by username
 app.delete('/user/:username', checkAuth, (req, res) => {
