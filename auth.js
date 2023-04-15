@@ -19,8 +19,6 @@ function checkAuth(req, res, next) {
   }
 }
 
-
-
 const setupAuth = (app, routes) => {
     routes.forEach(r => {
         if (r.auth) {

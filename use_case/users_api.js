@@ -36,20 +36,6 @@ router.get('/:username', checkAuth, (req, res) => {
         });
 })
 
-//app.use('/', checkAuth)
-function checkAuth(req, res, next) {
-    if (req.headers.authtoken) {
-        auth().verifyIdToken(req.headers.authtoken)
-            .then(() => {
-                next()
-            }).catch(() => {
-            res.status(403).send('Unauthorized')
-        });
-    } else {
-        res.status(403).send('Unauthorized2')
-    }
-}
-
 //Delete an user by username
 app.delete('/user/:username', checkAuth, (req, res) => {
     var url = url_users + req.params.username;
