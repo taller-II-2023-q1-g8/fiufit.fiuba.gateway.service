@@ -3,7 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 const admin = require('firebase-admin')
 const cors = require('cors');
-const user_route = require("./presentation/users_api")
+const user_route = require("./use_case/users_api")
 const cors_options = {
   origin: "*"
 }
@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
   })
 })
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Gateway listening on port ${port}`)
 })
 
 module.exports = app;
