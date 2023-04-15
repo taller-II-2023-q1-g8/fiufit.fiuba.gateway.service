@@ -69,9 +69,9 @@ app.put('/user', (req, res) => {
 })
 
 
-//Get an user by ID
-app.get('/user/:id', checkAuth, (req, res) => {
-  const url = 'https://fiufit-usuarios.onrender.com/user/' + req.params.id;
+//Get an user by username
+app.get('/user/:username', checkAuth, (req, res) => {
+  const url = 'https://fiufit-usuarios.onrender.com/user/' + req.params.username;
   console.log(url)
   axios.get(url)
       .then(response => {
@@ -93,9 +93,9 @@ app.get('/user/:id', checkAuth, (req, res) => {
       });
 })
 
-//Delete an user by ID
-app.delete('/user/:id', checkAuth, (req, res) => {
-  const url = 'https://fiufit-usuarios.onrender.com/user/' + req.params.id;
+//Delete an user by username
+app.delete('/user/:username', checkAuth, (req, res) => {
+  const url = 'https://fiufit-usuarios.onrender.com/user/' + req.params.username;
   console.log(url)
   axios.delete(url)
       .then(response => {
