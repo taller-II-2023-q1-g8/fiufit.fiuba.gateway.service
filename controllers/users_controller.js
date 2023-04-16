@@ -1,7 +1,3 @@
-import { Router } from "express"
-const router = Router()
-import { auth } from 'firebase-admin'
-
 var url_users = process.env.URL_USERS;
 
 if (url_users == null){
@@ -9,21 +5,20 @@ if (url_users == null){
     url_users = 'https://fiufit-usuarios.onrender.com/user/'
 }
 
-//For creating an user
-router.put('/', (req, res) => {
-    axios.put(url_users, req.body)
-        .then(response => {
-            res.statusCode = response.status
-            res.json({message: response.data})
-        })
-        .catch(error => {
-            res.statusCode = error.response.status
-            res.json({message: error.response.data})
-        });
-})
 
-//Get an user by username
-router.get('/:username', checkAuth, (req, res) => {
+function creater_user(req, res) {
+    axios.put(url_users, req.body)
+    .then(response => {
+        res.statusCode = response.status;
+        res.json({message: response.data})
+    })
+    .catch(error => {
+        res.statusCode = error.response.status;
+        res.json({message: error.response.data})
+    });
+}
+
+function find_by_username(req, res) {
     var url = url_users + req.params.username
     axios.get(url)
         .then(response => {
@@ -34,10 +29,9 @@ router.get('/:username', checkAuth, (req, res) => {
             res.statusCode = error.response.status
             res.json({message: error.response.data})
         });
-})
+}
 
-//Delete an user by username
-app.delete('/user/:username', checkAuth, (req, res) => {
+function delete_user(req, res) {
     var url = url_users + req.params.username;
     axios.delete(url)
         .then(response => {
@@ -48,19 +42,18 @@ app.delete('/user/:username', checkAuth, (req, res) => {
             res.statusCode = error.response.status;
             res.json({message: error.response.data})
         });
-})
+}
 
-//Update an user
-app.post('/user', checkAuth, (req, res) => {
+function update_user(req, res) {
     axios.post(url_users, req.bidt)
-    .then(response => {
-        res.statusCode = response.status;
-        res.json({message: response.data})
-    })
-    .catch(error => {
-        res.statusCode = error.response.status;
-        res.json({message: error.response.data})
-    });
-})
+        .then(response => {
+            res.statusCode = response.status;
+            res.json({message: response.data})
+        })
+        .catch(error => {
+            res.statusCode = error.response.status;
+            res.json({message: error.response.data})
+        });
+}
 
-export default {router}
+module.exports = {find_by_username, delete_user, update_user, creater_user}
