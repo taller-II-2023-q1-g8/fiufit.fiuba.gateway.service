@@ -1,3 +1,4 @@
+const axios = require("axios")
 var url_users = process.env.URL_USERS;
 
 if (url_users == null){

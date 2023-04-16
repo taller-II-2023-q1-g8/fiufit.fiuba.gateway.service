@@ -1,18 +1,19 @@
-import { Router } from "express"
-const router = Router()
-import { checkAuth } from '../middleware/auth'
-import * as user_controller from '../controllers/user_controller'
+const express = require("express")
+const router = express.Router()
+const auth_middleware = require("../middleware/auth")
+const checkAuth = auth_middleware.checkAuth
+const user_controller = require("../controllers/users_controller")
 
 //For creating an user
-router.put('/', checkAuth, user_controller.creater_user)
+router.put('/', user_controller.creater_user)
 
 //Get an user by username
 router.get('/:username', checkAuth, user_controller.find_by_username)
 
 //Delete an user by username
-app.delete('/user/:username', checkAuth, user_controller.delete_user)
+router.delete('/user/:username', checkAuth, user_controller.delete_user)
 
 //Update an user
-app.post('/user', checkAuth, user_controller.update_user)
+router.post('/user', checkAuth, user_controller.update_user)
 
-export default {router}
+module.exports = {router}

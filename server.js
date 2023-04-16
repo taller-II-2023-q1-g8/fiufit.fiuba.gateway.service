@@ -1,22 +1,21 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
-const admin = require('firebase-admin')
 const cors = require('cors');
-const user_route = require("./use_case/users_api")
+const user_route = require("./routes/users_routes")
 const cors_options = {
   origin: "*"
 }
 
 
 //const { createProxyMiddleware } = require('http-proxy-middleware');
-
+/*
 const serviceAccount = require("./fbkey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://fiufit-18294.firebaseio.com"
-});
+});*/
 
 var app = express();
 const port = 3000;
