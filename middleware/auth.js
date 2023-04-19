@@ -8,7 +8,7 @@ admin.initializeApp({
 
 function checkAuth(req, res, next) {
   if (req.headers.authtoken) {
-    admin.auth().verifyIdToken(req.headers.authtoken)
+      admin.auth().verifyIdToken(req.headers.authtoken)
       .then(() => {
         next()
       }).catch(() => {
