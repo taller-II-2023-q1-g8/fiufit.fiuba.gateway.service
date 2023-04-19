@@ -1,6 +1,8 @@
 const axios = require("axios")
 var url_users = process.env.URL_USERS;
 
+var sin_uso_prueba = 1;
+
 if (url_users == null){
     console.log("No URL found for Users Microservice in Environment Variables. Using default URL.")
     url_users = 'https://fiufit-usuarios.onrender.com/user/'
