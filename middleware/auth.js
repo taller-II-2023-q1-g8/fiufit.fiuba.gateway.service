@@ -1,5 +1,5 @@
 const admin = require('firebase-admin')
-const serviceAccount = require("./fbkey.json");
+const serviceAccount = require("../fbkey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -21,14 +21,4 @@ function checkAuth(req, res, next) {
 
 
 
-const setupAuth = (app, routes) => {
-    routes.forEach(r => {
-        if (r.auth) {
-            app.use(r.url, checkAuth, function (req, res, next) {
-                next();
-            });
-        }
-    });
-}
-
-exports.setupAuth = setupAuth
+module.exports = {checkAuth}
