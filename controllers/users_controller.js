@@ -19,8 +19,41 @@ function creater_user(req, res) {
     });
 }
 
-function find_by_username(req, res) {
-    var url = url_users + req.params.username
+function find_user(req, res) {
+    console.log("find_user")
+    if (req.query.username != null) {
+        var url = url_users + "?username=" + req.query.username
+    }
+    else if (req.query.email != null) {
+        var url = url_users + "?email=" + req.query.email
+    }
+    else {
+        var url = url_users
+    }
+
+    console.log(url)
+
+    axios.get(url)
+        .then(response => {
+            res.statusCode = response.status
+            res.json({message: response.data})
+        })
+        .catch(error => {
+            res.statusCode = error.response.status
+            res.json({message: error.response.data})
+        });
+}
+
+function usernames_starting_with(req, res) {
+    console.log("usernames_starting_with")
+    if (req.query.prefix != null) {
+        var url = url_users + "usernames/?prefix=" + req.query.prefix
+    }
+    else {
+        var url = url_users + "usernames/"
+    }
+    console.log(url)
+
     axios.get(url)
         .then(response => {
             res.statusCode = response.status
@@ -33,6 +66,7 @@ function find_by_username(req, res) {
 }
 
 function delete_user(req, res) {
+    console.log("delete_user")
     var url = url_users + req.params.username;
     axios.delete(url)
         .then(response => {
@@ -46,6 +80,7 @@ function delete_user(req, res) {
 }
 
 function update_user(req, res) {
+    console.log("update_user")
     axios.post(url_users, req.bidt)
         .then(response => {
             res.statusCode = response.status;
@@ -57,4 +92,4 @@ function update_user(req, res) {
         });
 }
 
-module.exports = {find_by_username, delete_user, update_user, creater_user}
+module.exports = {find_user, usernames_starting_with, delete_user, update_user, creater_user}
