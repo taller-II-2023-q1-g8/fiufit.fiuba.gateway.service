@@ -3,20 +3,45 @@ const router = express.Router()
 const auth_middleware = require("../middleware/auth")
 const checkAuth = auth_middleware.checkAuth
 const user_controller = require("../controllers/users_controller")
+const axios = require('axios')
 
-//For creating an user
-router.put('/', user_controller.creater_user)
+var url_users = process.env.URL_USERS;
 
-//Get an usernames, optional prefix for matching
-router.get('/usernames', user_controller.usernames_starting_with)
+if (url_users == null){
+    console.log("No URL found for Users Microservice in Environment Variables. Using default URL.")
+    url_users = 'https://fiufit-usuarios.onrender.com'
+}
+router.all('*', checkAuth, function(req, res) {
+    url = url_users + req.originalUrl
+    method = req.method
+    console.log("[PROXY " + method + "]:", url)
+    
+    var axios_promise
 
-//Get an user
-router.get('/', user_controller.find_user)
-
-//Delete an user by username
-router.delete('/:username', checkAuth, user_controller.delete_user)
-
-//Update an user
-router.post('/', checkAuth, user_controller.update_user)
+    switch(method) {
+        case "GET":
+            axios_promise = axios.get(url, req.body)
+            break
+        case "POST":
+            axios_promise = axios.post(url, req.body)
+            break
+        case "PUT":
+            axios_promise = axios.put(url, req.body)
+            break
+        case "DELETE":
+            axios_promise = axios.delete(url, req.body)
+            break
+    }
+    
+    axios_promise
+    .then(response => {
+        res.statusCode = response.status;
+        res.json({message: response.data})
+    })
+    .catch(error => {
+        res.statusCode = error.response.status;
+        res.json({message: error.response.data})
+    });
+})
 
 module.exports = {router}
