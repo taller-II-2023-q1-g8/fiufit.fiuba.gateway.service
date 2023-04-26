@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
-const auth_middleware = require("../middleware/auth")
-const checkAuth = auth_middleware.checkAuth
+//const auth_middleware = require("../middleware/auth")
+//const checkAuth = auth_middleware.checkAuth
 const axios = require('axios')
 
 var url_users = process.env.URL_USERS;
