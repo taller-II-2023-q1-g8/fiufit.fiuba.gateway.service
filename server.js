@@ -7,16 +7,6 @@ const cors_options = {
   origin: "*"
 }
 
-
-//const { createProxyMiddleware } = require('http-proxy-middleware');
-/*
-const serviceAccount = require("./fbkey.json");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://fiufit-18294.firebaseio.com"
-});*/
-
 var app = express();
 const port = 3000;
 
