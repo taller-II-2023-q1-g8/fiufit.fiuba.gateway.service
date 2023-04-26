@@ -1,5 +1,5 @@
 const expressJSDocSwagger = require('express-jsdoc-swagger');
-const path = require('path');
+//const path = require('path');
 
 module.exports = function (app) {
     const options = {
@@ -14,7 +14,7 @@ module.exports = function (app) {
                 scheme: 'basic'
             }
         },
-        baseDir: path.resolve(__dirname, '../../'),
+        //baseDir: path.resolve(__dirname, '../../'),
         //swaggerUi: path.join(__dirname, '../../docs/swagger-ui')
     };
 
