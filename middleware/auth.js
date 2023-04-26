@@ -17,10 +17,10 @@ function checkAuth(req, res, next) {
       .then(() => {
         next()
       }).catch(() => {
-        res.status(403).send('Unauthorized')
+        res.status(403).send('Invalid Credentials')
       });
   } else {
-    res.status(403).send('Unauthorized2')
+    res.status(403).send('No Login Token received')
   }
 }
 
