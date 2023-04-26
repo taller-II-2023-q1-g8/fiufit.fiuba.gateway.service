@@ -2,7 +2,6 @@ const express = require("express")
 const router = express.Router()
 const auth_middleware = require("../middleware/auth")
 const checkAuth = auth_middleware.checkAuth
-const user_controller = require("../controllers/users_controller")
 const axios = require('axios')
 
 var url_users = process.env.URL_USERS;
@@ -12,8 +11,8 @@ if (url_users == null){
     url_users = 'https://fiufit-usuarios.onrender.com'
 }
 router.all('*', checkAuth, function(req, res) {
-    url = url_users + req.originalUrl
-    method = req.method
+    let url = url_users + req.originalUrl
+    let method = req.method
     console.log("[PROXY " + method + "]:", url)
     
     var axios_promise
