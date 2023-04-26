@@ -3,8 +3,9 @@ const serviceAccount = require("../fbkey.json");
 
 var firestore_auth_URL = process.env.FIRESTORE_DATABASE_AUTH;
 if (firestore_auth_URL == null){
-    console.log("No URL found for FireStore Database in Env Vars, Authorization Module Halt. Using default URL.")
-    process.exit(-1)
+    console.log("No URL found for FireStore Database in Env Vars, Authorization Module Halt.")
+    firestore_auth_URL = 'https://fiufit-18294.firestore.southamerica-east1.firebaseapp.com/'
+    //process.exit(-1)
 }
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
