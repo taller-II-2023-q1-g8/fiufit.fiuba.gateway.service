@@ -10,7 +10,7 @@ if (url_users == null){
     console.log("No URL found for Users Microservice in Environment Variables. Using default URL.")
     process.exit(-1)
 }
-router.all('*', checkAuth, function(req, res) {
+router.all('*', function(req, res) {
     let url = url_users + req.originalUrl
     let method = req.method
     console.log("[PROXY " + method + "]:", url)
