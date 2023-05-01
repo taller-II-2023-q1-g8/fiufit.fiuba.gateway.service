@@ -8,8 +8,7 @@ var url_users = process.env.URL_USERS;
 
 if (url_users == null){
     console.log("No URL found for Users Microservice in Environment Variables.")
-    url_users = 'https://fiufit-usuarios.onrender.com'
-    //process.exit(-1)
+    process.exit(-1)
 }
 router.all('*', function(req, res) {
     let url = url_users + req.originalUrl

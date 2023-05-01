@@ -6,7 +6,7 @@ module.exports = function (app) {
         info: {
             title: 'Documentación Fiu-Fit API Gateway',
             version: '1.0.0',
-            description: 'El Gateway redirige '
+            description: 'El Gateway redirige las requests entrantes al microservicio correspondiente'
         },
         security: {
             basicAuth: {

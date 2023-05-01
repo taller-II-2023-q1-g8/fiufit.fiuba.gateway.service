@@ -25,7 +25,7 @@ app.use('/user', user_route.router)
 
 /**
  * GET /
- * @summary Hola Mundo
+ * @summary Documentación Ejemplo
  * @security basicAuth
  * @tags Microservicios
  * @return {object} 200 - Éxito
