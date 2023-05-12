@@ -16,4 +16,4 @@ Con el directorio root como CWD:
 ## Microservicios
 Actualmente, esta gateway incorpora los siguientes microservicios:
 
-* [Usuarios](https://github.com/taller-II-2023-q1-g8/fiufit.fiuba.user.api): Microservicio encargado de la administración y mantenimiento de los usuarios de la aplicación
+* [Usuarios](https://github.com/taller-II-2023-q1-g8/fiufit.fiuba.user.api): Microservicio encargado de la administración y mantenimiento de los usuarios de la aplicación.
