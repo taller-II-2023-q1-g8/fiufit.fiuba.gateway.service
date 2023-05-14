@@ -4,14 +4,14 @@ const router = express.Router()
 //const checkAuth = auth_middleware.checkAuth
 const axios = require('axios')
 
-let url_users = process.env.URL_USERS;
+const url_metrics_and_goals = process.env.URL_METRICS_AND_GOALS;
 
-if (url_users == null){
-    console.log("No URL found for Users Microservice in Environment Variables.")
+if (url_metrics_and_goals == null){
+    console.log("No URL found for Metrics and Goals Microservice in Environment Variables.")
     process.exit(-1)
 }
 router.all('*', function(req, res) {
-    let url = url_users + req.originalUrl
+    let url = url_metrics_and_goals + req.originalUrl
     let method = req.method
     console.log("[PROXY " + method + "]:", url)
     

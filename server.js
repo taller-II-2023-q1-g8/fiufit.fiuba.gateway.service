@@ -1,14 +1,16 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
+let express = require('express');
+let path = require('path');
+let logger = require('morgan');
 const cors = require('cors');
-const user_route = require("./routes/users_routes")
+const users_routes = require("./routes/users_routes")
+const metrics_routes = require("./routes/goals_and_metrics_routes")
+const goals_routes = require("./routes/goals_and_metrics_routes")
 const setupSwagger = require('./middleware/express-jsdoc-swagger');
 const cors_options = {
   origin: "*"
 }
 
-var app = express();
+let app = express();
 const port = 3000;
 
 setupSwagger(app);
@@ -21,7 +23,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //Routers
-app.use('/user', user_route.router)
+app.use('/user', users_routes.router)
+app.use('/metric', metrics_routes.router)
+app.use('/goal', goals_routes.router)
 
 /**
  * GET /
