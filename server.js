@@ -32,8 +32,8 @@ app.use('/multimedias', plans_routes.router)
 app.use('/trainers', plans_routes.router)
 app.use('/athletes', plans_routes.router)
 
-app.use('/metric', metrics_routes.router)
-app.use('/goal', goals_routes.router)
+app.use('/metrics', metrics_routes.router)
+app.use('/goals', goals_routes.router)
 
 
 /**
