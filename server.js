@@ -5,6 +5,7 @@ const cors = require('cors');
 const users_routes = require("./routes/users_routes")
 const metrics_routes = require("./routes/goals_and_metrics_routes")
 const goals_routes = require("./routes/goals_and_metrics_routes")
+const plans_routes = require("./routes/plans_routes")
 const setupSwagger = require('./middleware/express-jsdoc-swagger');
 const cors_options = {
   origin: "*"
@@ -24,8 +25,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Routers
 app.use('/user', users_routes.router)
+
+app.use('/plans', plans_routes.router)
+app.use('/exercises', plans_routes.router)
+app.use('/multimedias', plans_routes.router)
+app.use('/trainers', plans_routes.router)
+app.use('/athletes', plans_routes.router)
+
 app.use('/metric', metrics_routes.router)
 app.use('/goal', goals_routes.router)
+
 
 /**
  * GET /
