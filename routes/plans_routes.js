@@ -4,7 +4,8 @@ const router = express.Router()
 //const checkAuth = auth_middleware.checkAuth
 const axios = require('axios')
 
-const url_plans = process.env.URL_PLANS;
+// const url_plans = process.env.URL_PLANS;
+const url_plans = "https://fiufit-plans2.onrender.com/api/v1";
 
 if (url_plans == null){
     console.log("No URL found for Metrics and Goals Microservice in Environment Variables.")

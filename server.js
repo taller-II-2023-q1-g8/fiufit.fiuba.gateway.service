@@ -4,6 +4,7 @@ let logger = require('morgan');
 const cors = require('cors');
 const users_routes = require("./routes/users_routes")
 const metrics_routes = require("./routes/goals_and_metrics_routes")
+const messages_routes = require('./routes/messages_routes');
 const goals_routes = require("./routes/goals_and_metrics_routes")
 const plans_routes = require("./routes/plans_routes")
 const setupSwagger = require('./middleware/express-jsdoc-swagger');
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Routers
 app.use('/user', users_routes.router)
+app.use('/messages', messages_routes.router)
 
 app.use('/plans', plans_routes.router)
 app.use('/exercises', plans_routes.router)
