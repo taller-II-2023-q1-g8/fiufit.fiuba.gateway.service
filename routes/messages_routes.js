@@ -54,7 +54,9 @@ router.post("/send", async function (req, res) {
     res.json({ message: error.response.data });
   }
 
+  console.log("deviceToken:", deviceToken);
   const authToken = await getAccessToken();
+  console.log("authToken:", authToken);
 
   request_body = {
     message: {
