@@ -10,7 +10,7 @@ if (url_notifications == null) {
   process.exit(-1);
 }
 
-const url_tokens = process.env.URL_NOTIFICATIONS;
+const url_tokens = process.env.URL_TOKENS;
 if (url_tokens == null) {
   console.log("No URL found for Device Tokens in Environment Variables.");
   process.exit(-1);
