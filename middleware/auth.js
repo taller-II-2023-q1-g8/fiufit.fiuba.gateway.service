@@ -1,5 +1,5 @@
 const admin = require('firebase-admin')
-const serviceAccount = require("../config/fbkey.json");
+const serviceAccount = require("/etc/secrets/fbkey.json");
 
 var firestore_auth_URL = process.env.FIRESTORE_DATABASE_AUTH;
 if (firestore_auth_URL == null){

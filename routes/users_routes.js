@@ -4,8 +4,7 @@ const router = express.Router()
 //const checkAuth = auth_middleware.checkAuth
 const axios = require('axios')
 
-// let url_users = process.env.URL_USERS;
-let url_users = "https://fiufit-usuarios.onrender.com";
+let url_users = process.env.URL_USERS;
 
 if (url_users == null){
     console.log("No URL found for Users Microservice in Environment Variables.")
