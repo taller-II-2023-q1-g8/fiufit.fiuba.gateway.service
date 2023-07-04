@@ -58,7 +58,7 @@ router.post("/send", async function (req, res) {
   const authToken = await getAccessToken();
   console.log("authToken:", authToken);
 
-  request_body = {
+  let request_body = {
     message: {
       token: deviceToken,
       notification: {
