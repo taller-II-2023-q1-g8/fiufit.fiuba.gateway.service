@@ -19,7 +19,7 @@ if (url_services == null){
 
 async function validateApiKey(apiKey) {
     try {
-      const response = await axios.post(url_services, { apiKey });
+      const response = await axios.post(url_services + '/validate', { apiKey });
       return response.status === 200;
     } catch (error) {
       return false;
