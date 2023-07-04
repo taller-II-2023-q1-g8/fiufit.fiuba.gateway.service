@@ -1,15 +1,8 @@
 const express = require("express")
 const router = express.Router()
-//const auth_middleware = require("../middleware/auth")
-//const checkAuth = auth_middleware.checkAuth
 const axios = require('axios')
 
-const url_metrics_and_goals = process.env.URL_METRICS_AND_GOALS;
-
-if (url_metrics_and_goals == null){
-    console.log("No URL found for Metrics and Goals Microservice in Environment Variables.")
-    process.exit(-1)
-}
+import { validateApiKey } from "../middleware/api_key_validation.js"
 
 const url_services = process.env.URL_SERVICES;
 if (url_services == null){
@@ -17,9 +10,7 @@ if (url_services == null){
     process.exit(-1)
 }
 
-import { validateApiKey } from "../middleware/api_key_validation.js"
-
-router.all('*', async function(req, res) {
+  router.all('*', async function(req, res) {
     const apiKey = req.header('FiuFitAuth');
     const isValidKey = await validateApiKey(apiKey);
     if (!isValidKey) {
@@ -27,7 +18,7 @@ router.all('*', async function(req, res) {
         res.json({message: "Invalid API Key"});
         return;
     } else {
-        let url = url_metrics_and_goals + req.originalUrl
+        let url = url_services + req.originalUrl
         let method = req.method
         console.log("[PROXY " + method + "]:", url)
         
@@ -59,5 +50,3 @@ router.all('*', async function(req, res) {
         });
     }
 })
-
-module.exports = {router}
