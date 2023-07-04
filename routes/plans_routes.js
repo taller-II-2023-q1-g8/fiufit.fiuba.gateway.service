@@ -7,7 +7,7 @@ const axios = require('axios')
 const url_plans = process.env.URL_PLANS;
 
 if (url_plans == null){
-    console.log("No URL found for Metrics and Goals Microservice in Environment Variables.")
+    console.log("No URL found for Plans Microservice in Environment Variables.")
     process.exit(-1)
 }
 router.all('*', function(req, res) {
