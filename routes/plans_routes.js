@@ -27,6 +27,9 @@ router.all('*', function(req, res) {
         case "PUT":
             axios_promise = axios.put(url, req.body)
             break
+        case "PATCH":
+            axios_promise = axios.patch(url, req.body)
+            break
         case "DELETE":
             axios_promise = axios.delete(url, req.body)
             break
