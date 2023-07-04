@@ -6,7 +6,7 @@ if (url_services == null){
     process.exit(-1)
 }
 
-export async function validateApiKey(apiKey) {
+async function validateApiKey(apiKey) {
     try {
       const response = await axios.post(url_services + '/validate', { apiKey });
       return response.status === 200;
@@ -14,3 +14,5 @@ export async function validateApiKey(apiKey) {
       return false;
     }
   }
+
+module.exports = {validateApiKey};
