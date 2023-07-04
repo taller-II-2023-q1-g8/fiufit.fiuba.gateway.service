@@ -50,3 +50,5 @@ if (url_services == null){
         });
     }
 })
+
+module.exports = {router}
