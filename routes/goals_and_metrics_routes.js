@@ -4,7 +4,7 @@ const router = express.Router()
 //const checkAuth = auth_middleware.checkAuth
 const axios = require('axios')
 
-import { validateApiKey } from "../middleware/api_key_validation.js"
+const { validateApiKey } = require("../middleware/api_key_validation.js");
 
 const url_metrics_and_goals = process.env.URL_METRICS_AND_GOALS;
 if (url_metrics_and_goals == null){

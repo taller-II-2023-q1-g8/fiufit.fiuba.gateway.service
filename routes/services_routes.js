@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const axios = require('axios')
 
-import { validateApiKey } from "../middleware/api_key_validation.js"
+const { validateApiKey } = require("../middleware/api_key_validation.js");
 
 const url_services = process.env.URL_SERVICES;
 if (url_services == null){
