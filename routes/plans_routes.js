@@ -38,11 +38,11 @@ router.all('*', function(req, res) {
     axios_promise
         .then(response => {
             res.statusCode = response.status;
-            res.json({message: response.data})
+            res.json(response.data)
         })
         .catch(error => {
             res.statusCode = error.response.status;
-            res.json({message: error.response.data})
+            res.json(error.response.data)
         });
 })
 
