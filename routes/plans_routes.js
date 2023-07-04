@@ -29,6 +29,7 @@ router.all('*', function(req, res) {
             break
         case "PATCH":
             axios_promise = axios.patch(url, req.body)
+            break
         case "DELETE":
             axios_promise = axios.delete(url, req.body)
             break
