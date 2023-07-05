@@ -10,7 +10,15 @@ async function validateApiKey(apiKey) {
     try {
       let url = url_services + '/services/validate'
       console.log(url);
-      const response = await axios.get(url, { apiKey });
+      const response = await axios({
+        method: 'get',
+        url: url,
+        headers: {}, 
+        data: {
+          apiKey: apiKey, // This is the body part
+        }
+      });
+      //const response = await axios.get(url, { apiKey });
       return response.status === 200;
     } catch (error) {
       return false;
