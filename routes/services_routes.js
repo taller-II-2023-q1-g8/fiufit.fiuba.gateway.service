@@ -19,7 +19,7 @@ if (url_services == null){
         res.json({message: "Invalid API Key"});
         return;
     } else {
-        let url = url_services + "services" + req.originalUrl
+        let url = url_services + req.originalUrl
         let method = req.method
         console.log("[PROXY " + method + "]:", url)
         
