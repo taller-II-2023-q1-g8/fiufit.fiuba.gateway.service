@@ -29,6 +29,7 @@ async function serviceIsActive(serviceName) {
   console.log("Service Name:", serviceName)
   try {
     const response = await axios.get(url_services + '/services/state/' + serviceName);
+    console.log("Response:", response.status);
     return response.status === 200;
   } catch (error) {
     return false;
