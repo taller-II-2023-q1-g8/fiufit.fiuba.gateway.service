@@ -12,6 +12,7 @@ if (url_services == null){
 
   router.all('*', async function(req, res) {
     const apiKey = req.header('Fiu-Fit-Auth');
+    console.log("llave", apiKey);
     const isValidKey = await validateApiKey(apiKey);
     if (!isValidKey) {
         res.statusCode = 401;
