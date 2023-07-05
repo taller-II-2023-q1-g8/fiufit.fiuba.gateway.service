@@ -27,7 +27,6 @@ router.all('*', async function(req, res) {
             res.json({message: "Plans service is currently unavailable."});
             return;
         } else {
-            { 
                 let url = url_plans + req.originalUrl
             let method = req.method
             console.log("[PROXY " + method + "]:", url)
@@ -61,7 +60,7 @@ router.all('*', async function(req, res) {
                     res.statusCode = error.response.status;
                     res.json(error.response.data)
                 });
-            }
+            
         }
     }
 })
