@@ -4,7 +4,7 @@ const router = express.Router()
 //const checkAuth = auth_middleware.checkAuth
 const axios = require('axios')
 
-const { validateApiKey } = require("../middleware/api_key_validation.js");
+const { validateApiKey, serviceIsActive } = require("../middleware/api_key_validation.js");
 
 const url_plans = process.env.URL_PLANS;
 
@@ -18,6 +18,10 @@ router.all('*', async function(req, res) {
     if (!isValidKey) {
         res.statusCode = 401;
         res.json({message: "Invalid API Key"});
+        return;
+    } else if (!serviceIsActive("Plans")){
+        res.statusCode = 407;
+        res.json({message: "Plans service is currently unavailable."});
         return;
     } else { 
         let url = url_plans + req.originalUrl

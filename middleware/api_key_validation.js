@@ -8,11 +8,20 @@ if (url_services == null){
 
 async function validateApiKey(apiKey) {
     try {
-      const response = await axios.post(url_services + '/validate', { apiKey });
+      const response = await axios.get(url_services + '/validate', { apiKey });
       return response.status === 200;
     } catch (error) {
       return false;
     }
   }
 
-module.exports = {validateApiKey};
+async function serviceIsActive(serviceName) {
+  try {
+    const response = await axios.get(url_services + '/state/' + serviceName);
+    return response.status === 200;
+  } catch (error) {
+    return false;
+  }
+}
+
+module.exports = {validateApiKey, serviceIsActive};

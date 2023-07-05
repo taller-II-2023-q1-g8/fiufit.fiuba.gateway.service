@@ -7,6 +7,7 @@ const metrics_routes = require("./routes/goals_and_metrics_routes")
 const messages_routes = require('./routes/messages_routes');
 const goals_routes = require("./routes/goals_and_metrics_routes")
 const plans_routes = require("./routes/plans_routes")
+const services_routes = require("./routes/services_routes")
 const setupSwagger = require('./middleware/express-jsdoc-swagger');
 const cors_options = {
   origin: "*"
@@ -37,6 +38,8 @@ app.use('/verifications', plans_routes.router)
 
 app.use('/metrics', metrics_routes.router)
 app.use('/goals', goals_routes.router)
+
+app.use('/services', services_routes.router)
 
 
 /**
