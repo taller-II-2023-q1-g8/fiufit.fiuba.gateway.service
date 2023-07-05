@@ -26,6 +26,7 @@ async function validateApiKey(apiKey) {
   }
 
 async function serviceIsActive(serviceName) {
+  console.log("Service Name:", serviceName)
   try {
     const response = await axios.get(url_services + '/services/state/' + serviceName);
     return response.status === 200;
