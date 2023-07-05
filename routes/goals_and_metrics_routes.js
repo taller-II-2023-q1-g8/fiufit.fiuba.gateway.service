@@ -6,7 +6,7 @@ const axios = require('axios')
 
 const { validateApiKey, serviceIsActive } = require("../middleware/api_key_validation.js");
 
-const serviceName = 'Metas%20Y%20Métricas';
+const serviceName = 'Metas';
 
 const url_metrics_and_goals = process.env.URL_METRICS_AND_GOALS;
 if (url_metrics_and_goals == null){
