@@ -25,7 +25,7 @@ router.all('*', async function(req, res) {
         const serviceActive = await serviceIsActive(serviceName);
         if (!serviceActive){
             res.statusCode = 407;
-            res.json({message: "Plans service is currently unavailable."});
+            res.json({message: "Goals service is currently unavailable."});
             return;
         } else { 
                 let url = url_metrics_and_goals + req.originalUrl
