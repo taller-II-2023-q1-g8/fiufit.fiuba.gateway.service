@@ -9,6 +9,8 @@ const goals_routes = require("./routes/goals_and_metrics_routes")
 const plans_routes = require("./routes/plans_routes")
 const services_routes = require("./routes/services_routes")
 const setupSwagger = require('./middleware/express-jsdoc-swagger');
+const datadog = require('connect-datadog');
+
 const cors_options = {
   origin: "*"
 }
@@ -18,20 +20,18 @@ const port = 3000;
 
 setupSwagger(app);
 
-// Datadog
-var dd_options = {
-  'response_code':true,
-  'tags': ['app:FiuFit']
-}
-var connect_datadog = require('connect-datadog')(dd_options);
-app.use(connect_datadog);
-
-
-const dd = require('datadog');
-dd.init({
-  apiKey: 'd8cdea67907ec91ea23b648ee2efb3b5',
-  site: 'https://api-gateway-k1nl.onrender.com',
+app.use(
+  datadog({
+    response_code: true,
+    tags: ['app:fiufit']
+  })
+);
+const tracer = require('dd-trace').init({
+  agentUrl: "d8cdea67907ec91ea23b648ee2efb3b5",
+  env: 'production', 
+  service: 'fiufit',
 });
+app.use(tracer);
 
 app.use(logger('dev'));
 app.use(cors(cors_options));
