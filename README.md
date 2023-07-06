@@ -19,4 +19,4 @@ Actualmente, esta gateway incorpora los siguientes microservicios:
 * [Usuarios](https://github.com/taller-II-2023-q1-g8/fiufit.fiuba.user.api): Microservicio encargado de la administración y mantenimiento de los usuarios de la aplicación.
 * [Planes](https://github.com/taller-II-2023-q1-g8/fiufit.fiuba.plan.api): Microservicio encargado de la lógica y disposición de los planes creados y realizados por los usuarios de la aplicación.
 * [Metas y Métricas](https://github.com/taller-II-2023-q1-g8/fiufit.fiuba.goal.api): Microservicio encargado del seguimiento y progreso de los usuarios que realizan planes en la aplicación.
-* [Servicios](https://github.com/taller-II-2023-q1-g8/fiufit.services): Microservicio encargado de la adminsitración de los servicios usados en el proyecto FiuFit.
+* [Servicios](https://github.com/taller-II-2023-q1-g8/fiufit.service): Microservicio encargado de la adminsitración de los servicios usados en el proyecto FiuFit.
