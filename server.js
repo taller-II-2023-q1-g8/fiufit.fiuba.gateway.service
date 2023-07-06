@@ -18,6 +18,21 @@ const port = 3000;
 
 setupSwagger(app);
 
+// Datadog
+var dd_options = {
+  'response_code':true,
+  'tags': ['app:FiuFit']
+}
+var connect_datadog = require('connect-datadog')(dd_options);
+app.use(connect_datadog);
+
+
+const dd = require('datadog');
+dd.init({
+  apiKey: 'd8cdea67907ec91ea23b648ee2efb3b5',
+  site: 'https://api-gateway-k1nl.onrender.com',
+});
+
 app.use(logger('dev'));
 app.use(cors(cors_options));
 app.use(express.json());
