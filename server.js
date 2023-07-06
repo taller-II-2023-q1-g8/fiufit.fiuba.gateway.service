@@ -9,7 +9,7 @@ const goals_routes = require("./routes/goals_and_metrics_routes")
 const plans_routes = require("./routes/plans_routes")
 const services_routes = require("./routes/services_routes")
 const setupSwagger = require('./middleware/express-jsdoc-swagger');
-const datadog = require('connect-datadog');
+//const datadog = require('connect-datadog');
 
 const cors_options = {
   origin: "*"
@@ -20,7 +20,7 @@ const port = 3000;
 
 setupSwagger(app);
 
-app.use(
+/*app.use(
   datadog({
     response_code: true,
     tags: ['app:fiufit']
@@ -31,7 +31,7 @@ const tracer = require('dd-trace').init({
   env: 'production', 
   service: 'fiufit',
 });
-app.use(tracer);
+app.use(tracer);*/
 
 app.use(logger('dev'));
 app.use(cors(cors_options));
