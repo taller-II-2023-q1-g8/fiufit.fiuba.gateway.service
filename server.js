@@ -9,8 +9,6 @@ const goals_routes = require("./routes/goals_and_metrics_routes")
 const plans_routes = require("./routes/plans_routes")
 const services_routes = require("./routes/services_routes")
 const setupSwagger = require('./middleware/express-jsdoc-swagger');
-//const datadog = require('connect-datadog');
-
 const cors_options = {
   origin: "*"
 }
@@ -20,18 +18,16 @@ const port = 3000;
 
 setupSwagger(app);
 
-/*app.use(
-  datadog({
-    response_code: true,
-    tags: ['app:fiufit']
-  })
-);
-const tracer = require('dd-trace').init({
-  agentUrl: "d8cdea67907ec91ea23b648ee2efb3b5",
-  env: 'production', 
-  service: 'fiufit',
-});
-app.use(tracer);*/
+const dashboards = require('grafana-dashboards');
+
+
+var dd_options = {
+  'response_code':true,
+  'tags': ['app:fiufit']
+}
+var connect_datadog = require('connect-datadog')(dd_options);
+app.use(connect_datadog);
+
 
 app.use(logger('dev'));
 app.use(cors(cors_options));
@@ -80,5 +76,9 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Gateway listening on port ${port}`)
 })
+
+app.get('/grafana', (req, res) => {
+  res.send(dashboards);
+});
 
 module.exports = app;
