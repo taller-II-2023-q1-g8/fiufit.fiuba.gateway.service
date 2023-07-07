@@ -23,9 +23,23 @@ var dd_options = {
   'response_code':true,
   'tags': ['app:fiufit']
 }
-var connect_datadog = require('connect-datadog')(dd_options);
-app.use(connect_datadog);
+var connectDatadog = require('connect-datadog')(dd_options);
+const datadogMetricsMiddleware = (req, res, next) => {
+  connectDatadog(req, res, (err) => {
+    if (err) {
+      console.error('connect-datadog error:', err);
+    } else {
+      // Increment custom metric
+      if (res.statusCode === 200) {
+        req.datadog.increment('custom.metric');
+      }
+    }
+    next(err);
+  });
+};
 
+// Add the middleware to your Express.js application
+app.use(datadogMetricsMiddleware);
 
 app.use(logger('dev'));
 app.use(cors(cors_options));
@@ -66,7 +80,6 @@ app.use('/services', services_routes.router)
  * ]
  */
 app.get('/', (req, res) => {
-  connect_datadog.increment('api.requests');
   res.json({
     message: 'Hello World!'
   })
