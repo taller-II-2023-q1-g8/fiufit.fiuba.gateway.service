@@ -21,7 +21,7 @@ function getAccessToken() {
   const SCOPES = ["https://www.googleapis.com/auth/firebase.messaging"];
 
   return new Promise(function (resolve, reject) {
-    const key = require("etc/secrets/fbkey.json");
+    const key = require("/etc/secrets/fbkey.json");
     const jwtClient = new JWT(
       key.client_email,
       null,
