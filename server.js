@@ -19,12 +19,6 @@ const port = 3000;
 
 setupSwagger(app);
 
-var dd_options = {
-  'response_code':true,
-  'tags': ['app:fiufit']
-}
-
-
 app.use(logger('dev'));
 app.use(cors(cors_options));
 app.use(express.json());
