@@ -9,12 +9,6 @@ const goals_routes = require("./routes/goals_and_metrics_routes")
 const plans_routes = require("./routes/plans_routes")
 const services_routes = require("./routes/services_routes")
 const setupSwagger = require('./middleware/express-jsdoc-swagger');
-const ddMetrics = require('datadog-metrics');
-// Initialize Datadog
-ddMetrics.init({
-  apiKey: 'd8cdea67907ec91ea23b648ee2efb3b5',
-  appKey: '07c3dd14fc1cc99842a660aa6354b0aff712dd58',
-});
 
 const cors_options = {
   origin: "*"
@@ -24,7 +18,6 @@ let app = express();
 const port = 3000;
 
 setupSwagger(app);
-app.use(ddMetrics.middleware);
 
 var dd_options = {
   'response_code':true,
@@ -73,7 +66,7 @@ app.use('/services', services_routes.router)
  * ]
  */
 app.get('/', (req, res) => {
-  ddMetrics.increment('api.requests');
+  connect_datadog.increment('api.requests');
   res.json({
     message: 'Hello World!'
   })
