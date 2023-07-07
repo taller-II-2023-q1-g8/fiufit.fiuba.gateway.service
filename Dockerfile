@@ -1,4 +1,4 @@
-FROM node:20-buster
+FROM 20-alpine3.17
 
 WORKDIR .
 COPY package*.json ./
