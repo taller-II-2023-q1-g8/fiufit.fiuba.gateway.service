@@ -21,7 +21,7 @@ function getAccessToken() {
   const SCOPES = ["https://www.googleapis.com/auth/firebase.messaging"];
 
   return new Promise(function (resolve, reject) {
-    const key = require("/etc/secrets/fbkey.json");
+    const key = require("../config/fbkey.json");
     const jwtClient = new JWT(
       key.client_email,
       null,
@@ -62,9 +62,12 @@ router.post("/send", async function (req, res) {
       res.statusCode = error.response.status;
       res.json({ message: error.response.data });
     }
-  
+    
+    if (!deviceToken)
+      return
+
     console.log("deviceToken:", deviceToken);
-    const authToken = await getAccessToken();
+    const authToken = await getAccessToken()
     console.log("authToken:", authToken);
   
     let request_body = {
@@ -76,7 +79,6 @@ router.post("/send", async function (req, res) {
         },
       },
     };
-  
   
     fetch(url_notifications, {
       method: "POST",
@@ -91,6 +93,7 @@ router.post("/send", async function (req, res) {
         res.json({ message: response.data });
       })
       .catch((error) => {
+        console.log("error!!!!:", error);
         res.statusCode = error.response.status;
         res.json({ message: error.response.data });
       });
