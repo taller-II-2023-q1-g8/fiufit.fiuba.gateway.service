@@ -9,7 +9,6 @@ const goals_routes = require("./routes/goals_and_metrics_routes")
 const plans_routes = require("./routes/plans_routes")
 const services_routes = require("./routes/services_routes")
 const setupSwagger = require('./middleware/express-jsdoc-swagger');
-
 const cors_options = {
   origin: "*"
 }
@@ -23,23 +22,8 @@ var dd_options = {
   'response_code':true,
   'tags': ['app:fiufit']
 }
-var connectDatadog = require('connect-datadog')(dd_options);
-const datadogMetricsMiddleware = (req, res, next) => {
-  connectDatadog(req, res, (err) => {
-    if (err) {
-      console.error('connect-datadog error:', err);
-    } else {
-      // Increment custom metric
-      if (res.statusCode === 200) {
-        req.datadog.increment('custom.metric');
-      }
-    }
-    next(err);
-  });
-};
+var connect_datadog = require('connect-datadog')(dd_options);
 
-// Add the middleware to your Express.js application
-app.use(datadogMetricsMiddleware);
 
 app.use(logger('dev'));
 app.use(cors(cors_options));
@@ -47,6 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(connect_datadog);
 
 //Routers
 app.use('/user', users_routes.router)
@@ -80,6 +65,7 @@ app.use('/services', services_routes.router)
  * ]
  */
 app.get('/', (req, res) => {
+  console.log(connect_datadog);
   res.json({
     message: 'Hello World!'
   })
