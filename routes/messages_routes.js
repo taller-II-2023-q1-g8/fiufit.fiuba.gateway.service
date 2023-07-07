@@ -58,6 +58,7 @@ router.post("/send", async function (req, res) {
       const response = await axios.get(url);
       deviceToken = response.data
     } catch (error) {
+      console.log("error:", error);
       res.statusCode = error.response.status;
       res.json({ message: error.response.data });
     }
