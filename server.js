@@ -18,7 +18,13 @@ const port = 3000;
 
 setupSwagger(app);
 
-const dashboards = require('grafana-dashboards');
+var dd_options = {
+  'response_code':true,
+  'tags': ['app:fiufit']
+}
+var connect_datadog = require('connect-datadog')(dd_options);
+app.use(connect_datadog);
+
 
 app.use(logger('dev'));
 app.use(cors(cors_options));
@@ -67,9 +73,5 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Gateway listening on port ${port}`)
 })
-
-app.get('/grafana', (req, res) => {
-  res.send(dashboards);
-});
 
 module.exports = app;

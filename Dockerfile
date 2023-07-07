@@ -1,9 +1,10 @@
-FROM node:19-alpine3.16
+FROM node:20-buster
 
 WORKDIR .
 COPY package*.json ./
 
 RUN npm ci --only=production
 COPY . .
+RUN DD_API_KEY=d8cdea67907ec91ea23b648ee2efb3b5 DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 
 CMD ["node", "server.js"]
